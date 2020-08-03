@@ -6,9 +6,12 @@ recursive execution.
 
 On one hand, who cares about recursion? It hurts your head, right?
 
-On the other hand, this introduces a sharp-edged restriction into your system that your really need to be aware 
+On the other hand, this introduces a sharp-edged restriction into your system that you really need to be aware 
 of. If your system causes some accidental recursion (even if it's only once), your Flow won't do what you expect. Or, at
 least, that was my concern. So, here's a project I built to test the theory.
+
+You can download this and try it for yourself! Especially if it turns out that I've done something dumb, but I think 
+it's right.
 
 ## The Flow
 
@@ -145,4 +148,5 @@ assigned to the Hot Queue with a before trigger, I can just forget about it. The
 the right queue. With Before Flows, this abstraction becomes [leaky](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
 
 In the presence of a complicated system where automation can bounce from one object to another, recursive loops that 
-stop Flow may be very hard to spot. So, you may very well be scratching your head about this one in the future.    
+stop Flow may be very hard to spot. And sometimes recursion isn't your choice - it may be thrust upon you be packages 
+or by legacy code. So, you may very well be scratching your head about this one in the future.    
