@@ -3,9 +3,6 @@
     <doesSendEmailToMembers>false</doesSendEmailToMembers>
     <name>Hot Queue</name>
     <queueMembers>
-        <users>
-            <user>test-rjkjwq9slths@example.com</user>
-        </users>
     </queueMembers>
     <queueSobject>
         <sobjectType>Lead</sobjectType>
