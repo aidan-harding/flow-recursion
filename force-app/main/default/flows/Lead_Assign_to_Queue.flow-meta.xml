@@ -3,13 +3,13 @@
     <assignments>
         <name>Assign_to_Hot_Queue</name>
         <label>Assign to Hot Queue</label>
-        <locationX>450</locationX>
-        <locationY>318</locationY>
+        <locationX>552</locationX>
+        <locationY>317</locationY>
         <assignmentItems>
             <assignToReference>$Record.OwnerId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>00G2D000002DLqT</stringValue>
+                <elementReference>Get_Hot_Queue_Id.Id</elementReference>
             </value>
         </assignmentItems>
     </assignments>
@@ -17,7 +17,7 @@
         <name>Check_Rating</name>
         <label>Check Rating</label>
         <locationX>207</locationX>
-        <locationY>320</locationY>
+        <locationY>319</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Hot</name>
@@ -37,28 +37,9 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Assign_to_Hot_Queue</targetReference>
+                <targetReference>Get_Hot_Queue_Id</targetReference>
             </connector>
             <label>Hot</label>
-        </rules>
-        <rules>
-            <name>Warm</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.Rating</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Warm</stringValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Company</leftValueReference>
-                <operator>Contains</operator>
-                <rightValue>
-                    <stringValue>Flow</stringValue>
-                </rightValue>
-            </conditions>
-            <label>Warm</label>
         </rules>
     </decisions>
     <interviewLabel>Lead Assign to Queue {!$Flow.CurrentDateTime}</interviewLabel>
@@ -76,6 +57,33 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Hot_Queue_Id</name>
+        <label>Get Hot Queue Id</label>
+        <locationX>390</locationX>
+        <locationY>317</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_to_Hot_Queue</targetReference>
+        </connector>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Hot_Queue</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <start>
         <locationX>50</locationX>
         <locationY>49</locationY>
@@ -86,5 +94,5 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordBeforeSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
 </Flow>
