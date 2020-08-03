@@ -21,6 +21,24 @@ private class LeadAssignmentTest {
     }
 
     @IsTest
+    static void flowSetsOwnerOnUpdate() {
+        Lead testLead = new Lead(Company = 'ACME Flow', LastName = 'Duck');
+        insert testLead;
+        testLead = [SELECT OwnerId FROM Lead WHERE Id = :testLead.Id];
+
+        System.assertNotEquals(hotQueue.Id, testLead.OwnerId);
+
+        Test.startTest();
+        testLead.Rating = 'Hot';
+        update testLead;
+        Test.stopTest();
+
+        testLead = [SELECT OwnerId FROM Lead WHERE Id = :testLead.Id];
+
+        System.assertEquals(hotQueue.Id, testLead.OwnerId);
+    }
+
+    @IsTest
     static void pbSetsHot() {
         Lead testLead = new Lead(Company = 'ACME Unicorns PB', LastName = 'Duck');
 
